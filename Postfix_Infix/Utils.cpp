@@ -13,12 +13,15 @@
 
 using namespace std;
 
-string infixToPostfix(string expr)//Function to perform all conversion operation
+//=========================================================================================
+// Function to perform all conversion operation
+//=========================================================================================
+
+string infix_To_Postfix(string expr)
 {
-    
-    Stack stack;//Declaring a stack for conversion purpose
-    string postfix = "";//Initialize the output string as empty;
-    for(int i = 0;i < expr.length(); i++)//Scan the infix string one by one
+    Stack<char> stack;
+    string postfix = "";
+    for(int i = 0;i < expr.length(); i++)
         if(expr[i] == '(')
         {
             stack.Push(expr[i]);
@@ -32,13 +35,13 @@ string infixToPostfix(string expr)//Function to perform all conversion operation
             }
             stack.Pop();
         }
-        else if(isoperand(expr[i]))
+        else if(Is_Operand(expr[i]))
         {
             postfix += expr[i];
         }
-        else if(isoperator(expr[i]))
+        else if(Is_Operator(expr[i]))
         {
-            while(!stack.Is_Empty()&& !highprecendence(expr[i],stack.Top()))
+            while(!stack.Is_Empty()&& !Find_Highest_Precendence(expr[i],stack.Top()))
             {
                 postfix+= stack.Top();
                 stack.Pop();
@@ -53,29 +56,51 @@ string infixToPostfix(string expr)//Function to perform all conversion operation
     return postfix;
 }
 
-bool highprecendence(char a, char b)//Check for operator precendence
+//=========================================================================================
+// Check for operator precendence.
+//=========================================================================================
+
+bool Find_Highest_Precendence(char a, char b)
 {
-    int weighta = operatorweight(a);
-    int weightb = operatorweight(b);
-    if(weighta >= weightb) return 1;
+    int weighta = Add_Weight(a);
+    int weightb = Add_Weight(b);
+    if(weighta >= weightb)
+        return 1;
     return 0;
 }
 
-bool isoperator(char arg)//Check weather the character is operator
+//=========================================================================================
+// Check weather the character is operator'
+//=========================================================================================
+
+bool Is_Operator(char arg)
 {
-    if(arg == '*' || arg == '/' || arg == '+' || arg == '-') return(1);
-    else return(0);
+    if(arg == '*' || arg == '/' || arg == '+' || arg == '-')
+        return 1;
+    else
+        return 0;
 }
 
-bool isoperand(char arg)//Check weather the character is operand
+//=========================================================================================
+// Check weather the character is operand.
+//=========================================================================================
+
+bool Is_Operand(char arg)
 {
-    if(arg >= '0' && arg <= '9') return 1;
-    if(arg >= 'a' && arg <= 'z') return 1;
-    if(arg >= 'A' && arg <= 'Z') return 1;
+    if(arg >= '0' && arg <= '9')
+        return 1;
+    if(arg >= 'a' && arg <= 'z')
+        return 1;
+    if(arg >= 'A' && arg <= 'Z')
+        return 1;
     return 0;
 }
 
-int operatorweight(char arg)//Add weight to the operator
+//=========================================================================================
+// Add weight to the operator.
+//=========================================================================================
+
+int Add_Weight(char arg)
 {
     int weight = 0;
     switch(arg)
@@ -91,3 +116,20 @@ int operatorweight(char arg)//Add weight to the operator
     }
     return(weight);
 }
+
+//=========================================================================================
+// Evauluate Postfix.
+//=========================================================================================
+string Evluate_Postfix(string expression)
+{
+    Stack<int> stack;
+    
+    for (int i = 0; i < expression.length(); i++)
+    {
+        if (Is_Operand(expression[i]))
+        {
+            int temp = expression[i] - '0';
+        }
+    }
+}
+

@@ -16,7 +16,7 @@ int main() {
     string expression;
     cout<< "Enter Infix Expression: ";
     getline(cin,expression);
-    string postfix = infixToPostfix(expression);
+    string postfix = infix_To_Postfix(expression);
     cout << "Output = " << postfix<< "\n";
     return 0;
 }

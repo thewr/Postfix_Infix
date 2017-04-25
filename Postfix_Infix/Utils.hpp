@@ -14,10 +14,10 @@
 #include <string>
 
 using namespace std;
-string infixToPostfix(string expr);
-bool highprecendence(char a, char b);
-bool isoperator(char arg);
-bool isoperand(char arg);
-int operatorweight(char arg);
+string infix_To_Postfix(string expr);
+bool Find_Highest_Precendence(char a, char b);
+bool Is_Operator(char arg);
+bool Is_Operand(char arg);
+int Add_Weight(char arg);
 #endif /* Utils_hpp */
 

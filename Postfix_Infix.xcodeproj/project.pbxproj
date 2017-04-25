@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		847D30491EAD2DA6003E98EE /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 847D30471EAD2DA6003E98EE /* Utils.cpp */; };
 		84B00E621EA165D1007D8C22 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84B00E611EA165D1007D8C22 /* main.cpp */; };
-		84B00E6A1EA16671007D8C22 /* Stack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84B00E681EA16671007D8C22 /* Stack.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,7 +28,6 @@
 		847D30481EAD2DA6003E98EE /* Utils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Utils.hpp; sourceTree = "<group>"; };
 		84B00E5E1EA165D1007D8C22 /* Postfix_Infix */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Postfix_Infix; sourceTree = BUILT_PRODUCTS_DIR; };
 		84B00E611EA165D1007D8C22 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		84B00E681EA16671007D8C22 /* Stack.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Stack.cpp; sourceTree = "<group>"; };
 		84B00E691EA16671007D8C22 /* Stack.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Stack.hpp; sourceTree = "<group>"; };
 		84B00E6B1EA166E2007D8C22 /* constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -65,7 +63,6 @@
 			isa = PBXGroup;
 			children = (
 				84B00E611EA165D1007D8C22 /* main.cpp */,
-				84B00E681EA16671007D8C22 /* Stack.cpp */,
 				84B00E691EA16671007D8C22 /* Stack.hpp */,
 				84B00E6B1EA166E2007D8C22 /* constants.h */,
 				847D30471EAD2DA6003E98EE /* Utils.cpp */,
@@ -131,7 +128,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84B00E6A1EA16671007D8C22 /* Stack.cpp in Sources */,
 				847D30491EAD2DA6003E98EE /* Utils.cpp in Sources */,
 				84B00E621EA165D1007D8C22 /* main.cpp in Sources */,
 			);
