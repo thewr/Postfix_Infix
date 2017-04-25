@@ -120,16 +120,128 @@ int Add_Weight(char arg)
 //=========================================================================================
 // Evauluate Postfix.
 //=========================================================================================
+
 string Evluate_Postfix(string expression)
 {
     Stack<int> stack;
-    
     for (int i = 0; i < expression.length(); i++)
     {
         if (Is_Operand(expression[i]))
         {
-            int temp = expression[i] - '0';
+            int temp = Convert_From_Base_36_To_Base_10(expression[i]);
+            cout << "value before being pushed: " << temp << endl;
+            stack.Push(temp);
+        }
+        
+//        else if (Is_Operator(expression[i]) && stack.Size() == 1)
+//        {
+//            int operand1 = stack.Top();
+//            stack.Pop();
+//            int result_of_operation = Solve_Expression(expression[i], operand1, 0);
+//            cout << "result of expression: "<<result_of_operation << endl;
+//            cout << "expression: " << expression[i] << endl;
+//            stack.Push(result_of_operation);
+//            
+//        }
+        
+        else if (Is_Operator(expression[i]))
+        {
+            int operand2 = stack.Top();
+            stack.Pop();
+            int operand1 = stack.Top();
+            stack.Pop();
+            int result_of_operation = Solve_Expression(expression[i], operand1, operand2);
+            cout << "result of expression: "<<result_of_operation << endl;
+            cout << "expression: " << expression[i] << endl;
+            stack.Push(result_of_operation);
         }
     }
+    
+    string result = "";
+    result +=  Convert_From_Base_10_To_Base_36(stack.Top());
+    return result;
 }
 
+//=========================================================================================
+// Solves an expression.
+// Uses the char operator as the operation.
+// Uses oprand1 and oprand2 as the operands
+// example:
+//          result = operand1 (char operator) operand2
+//          return result;
+//=========================================================================================
+
+int Solve_Expression(char operation, int operand1, int operand2)
+{
+    int result = 0;
+    switch (operation)
+    {
+        case '+':
+            result = operand1 + operand2;
+            break;
+        
+        case '-':
+            result = operand1 - operand2;
+            break;
+            
+        case '*':
+            result = operand1 * operand2;
+            break;
+            
+        case '/':
+            result = operand1/operand2;
+            break;
+    }
+    
+    return result;
+}
+
+//=========================================================================================
+// Converts base 36 number to base 10.
+//=========================================================================================
+
+int Convert_From_Base_36_To_Base_10(char number)
+{
+    int result = 0;
+    
+    if ('0' <= number && number <= '9')
+    {
+        result = number - '0';
+    }
+    
+    else
+    {
+        result = number - 65;
+        result += 10;
+    }
+    
+    return result;
+}
+
+//=========================================================================================
+// Converts base 10 number to base 32.
+//=========================================================================================
+
+string Convert_From_Base_10_To_Base_36(int number)
+{
+    string result = "";
+    bool is_negative = number < 0;
+    number = is_negative? number *= -1 : number;
+    
+    while (number != 0)
+    {
+        int remainder = number % 36;
+        
+        if (remainder >= 10)
+        {
+            char temp = (remainder - 10) + 'A';
+            result = temp + result;
+        }
+        
+        else
+            result = to_string(remainder) + result;
+        number /= 36;
+    }
+    result = is_negative? "-" + result : result;
+    return result;
+}

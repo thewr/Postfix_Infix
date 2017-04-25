@@ -19,5 +19,9 @@ bool Find_Highest_Precendence(char a, char b);
 bool Is_Operator(char arg);
 bool Is_Operand(char arg);
 int Add_Weight(char arg);
+string Evluate_Postfix(string expression);
+int Solve_Expression(char operation, int operand1, int operand2);
+int Convert_From_Base_36_To_Base_10(char number);
+string Convert_From_Base_10_To_Base_36(int number);
 #endif /* Utils_hpp */
 

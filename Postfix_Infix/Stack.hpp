@@ -22,6 +22,7 @@ public:
     XType Top();
     bool Is_Empty();
     bool Is_Full();
+    int Size();
 
 private:
     
@@ -93,5 +94,14 @@ template <class XType> void Stack<XType>:: Pop()
 {
     head = head->next;
     size--;
+}
+
+//=========================================================================================
+// Returns size of the stack.
+//=========================================================================================
+
+template <class XType> int Stack<XType>:: Size()
+{
+    return size;
 }
 #endif /* Stack_hpp */
