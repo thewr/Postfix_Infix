@@ -65,8 +65,8 @@ bool Find_Highest_Precendence(char a, char b)
     int weighta = Add_Weight(a);
     int weightb = Add_Weight(b);
     if(weighta >= weightb)
-        return 1;
-    return 0;
+        return true;
+    return false;
 }
 
 //=========================================================================================

@@ -15,10 +15,31 @@ using namespace std;
 
 void Menu(int choice);
 string Get_Input(string prompt);
+string To_Lower(string word);
 
 int main() {
-    int menu_option = User_Inputted_Number(MENU_PROMPT, INVALID_MENU_INPROMPT, INVALID_MENU_INPROMPT, MENU_LOWER_BOUND_OPTION, MENU_UPPER_BOUND_OPTION);
-    Menu(menu_option);
+    cout << "This is a program that converts and evevaluates postfix and infix equations in base 36!\n\n";
+    bool continue_program;
+    do
+    {
+        int menu_option = User_Inputted_Number(MENU_PROMPT, INVALID_MENU_INPROMPT, INVALID_MENU_INPROMPT, MENU_LOWER_BOUND_OPTION, MENU_UPPER_BOUND_OPTION);
+        Menu(menu_option);
+        string user_choice;
+        
+        cout << "\nDo you wish to continue the program enter yes else enter no: ";
+        getline(cin, user_choice);
+        
+        user_choice = To_Lower(user_choice);
+        
+        while (user_choice != "yes" && user_choice != "no" )
+        {
+            cout << "Please enter yes to conitnue or enter no to quit: ";
+            getline(cin, user_choice);
+            user_choice = To_Lower(user_choice);
+        }
+        
+        continue_program = (user_choice == "yes");
+    } while (continue_program);
     return 0;
 }
 
@@ -69,4 +90,14 @@ string Get_Input(string prompt)
     } while (!invaild_input);
     
     return expression;
+}
+
+string To_Lower(string word)
+{
+    for (int i = 0; i < word.length(); i++)
+    {
+        word[i] = tolower(word[i]);
+    }
+    
+    return word;
 }
