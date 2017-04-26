@@ -41,7 +41,7 @@ string infix_To_Postfix(string expr)
         }
         else if(Is_Operator(expr[i]))
         {
-            while(!stack.Is_Empty()&& !Find_Highest_Precendence(expr[i],stack.Top()))
+            while(!stack.Is_Empty() && Find_Highest_Precendence(stack.Top(), expr[i]))
             {
                 postfix+= stack.Top();
                 stack.Pop();
@@ -89,8 +89,6 @@ bool Is_Operand(char arg)
 {
     if(arg >= '0' && arg <= '9')
         return 1;
-    if(arg >= 'a' && arg <= 'z')
-        return 1;
     if(arg >= 'A' && arg <= 'Z')
         return 1;
     return 0;
@@ -129,20 +127,8 @@ string Evluate_Postfix(string expression)
         if (Is_Operand(expression[i]))
         {
             int temp = Convert_From_Base_36_To_Base_10(expression[i]);
-            cout << "value before being pushed: " << temp << endl;
             stack.Push(temp);
         }
-        
-//        else if (Is_Operator(expression[i]) && stack.Size() == 1)
-//        {
-//            int operand1 = stack.Top();
-//            stack.Pop();
-//            int result_of_operation = Solve_Expression(expression[i], operand1, 0);
-//            cout << "result of expression: "<<result_of_operation << endl;
-//            cout << "expression: " << expression[i] << endl;
-//            stack.Push(result_of_operation);
-//            
-//        }
         
         else if (Is_Operator(expression[i]))
         {
@@ -151,8 +137,6 @@ string Evluate_Postfix(string expression)
             int operand1 = stack.Top();
             stack.Pop();
             int result_of_operation = Solve_Expression(expression[i], operand1, operand2);
-            cout << "result of expression: "<<result_of_operation << endl;
-            cout << "expression: " << expression[i] << endl;
             stack.Push(result_of_operation);
         }
     }
@@ -244,4 +228,33 @@ string Convert_From_Base_10_To_Base_36(int number)
     }
     result = is_negative? "-" + result : result;
     return result;
+}
+
+//=========================================================================================
+// Make user user enters a valid number
+//=========================================================================================
+
+int User_Inputted_Number(string prompt, string invalid_prompt, string out_of_bounds_prompt, int lower_bounds, int upper_bounds)
+{
+    int number = -1;
+    string user_entered_number;
+    
+    while (number == -1 || (number < lower_bounds || number > upper_bounds))
+    {
+        cout << prompt;
+        getline(cin, user_entered_number);
+        number = stoi(user_entered_number);
+        cout << "\n";
+        if (number == -1)
+        {
+            cout << invalid_prompt << "\n\n";
+        }
+        
+        else if (number < lower_bounds || number > upper_bounds)
+        {
+            cout << out_of_bounds_prompt << "\n";
+        }
+    }
+    
+    return number;
 }
