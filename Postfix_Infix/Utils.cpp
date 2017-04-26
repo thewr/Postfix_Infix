@@ -214,7 +214,7 @@ string Convert_From_Base_10_To_Base_36(int number)
     
     while (number != 0)
     {
-        int remainder = number % 36;
+        int remainder = number % BASE;
         
         if (remainder >= 10)
         {
@@ -224,7 +224,7 @@ string Convert_From_Base_10_To_Base_36(int number)
         
         else
             result = to_string(remainder) + result;
-        number /= 36;
+        number /= BASE;
     }
     result = is_negative? "-" + result : result;
     return result;
@@ -243,7 +243,7 @@ int User_Inputted_Number(string prompt, string invalid_prompt, string out_of_bou
     {
         cout << prompt;
         getline(cin, user_entered_number);
-        number = stoi(user_entered_number);
+        number = String_To_Int(user_entered_number.c_str());
         cout << "\n";
         if (number == -1)
         {
@@ -257,4 +257,82 @@ int User_Inputted_Number(string prompt, string invalid_prompt, string out_of_bou
     }
     
     return number;
+}
+
+//=========================================================================================
+// Validates user input.
+//=========================================================================================
+
+bool Validate_Input(string postfix)
+{
+    int operators = 0;
+    int operands = 0;
+    bool input_is_valid = true;
+    
+    for(int i = 0; i < postfix.length() && input_is_valid; i++)
+    {
+        if (postfix[i] == '+' || postfix[i] == '-' || postfix[i] == '*' || postfix[i] == '/')
+        {
+            operators++;
+        }
+        
+        else if (('A' <= postfix[i] && postfix[i] <= 'Z') || ('0' <= postfix[i] && postfix[i] <= '9') || (postfix[i] == ')' || postfix[i] == '('))
+        {
+            operands++;
+        }
+        
+        else
+        {
+            input_is_valid = false;
+        }
+        
+    }
+    
+    if (input_is_valid)
+    {
+        input_is_valid = (operators <= operands);
+    }
+    
+    return input_is_valid;
+}
+
+//==========================================================================================
+// Takes constant char pointer and converts it into a string.
+// If one of the characters are not a digit the function returns -1.
+//==========================================================================================
+
+int String_To_Int(const char *str)
+{
+    int result = 0;
+    int prefix = 0;
+    
+    if (str[0] == '\0')
+    {
+        return -1;
+    }
+    
+    else if (str[0] == '-' || str[0] == '+')
+    {
+        prefix = 1;
+    }
+    
+    for (int i = prefix; str[i] != '\0'; ++i)
+    {
+        if ('0' <= str[i] && str[i] <= '9')
+        {
+            result = result*10 + str[i] - '0';
+        }
+        
+        else
+        {
+            return -1;
+        }
+    }
+    
+    if (str[0] == '-')
+    {
+        result *= -1;
+    }
+    
+    return result;
 }

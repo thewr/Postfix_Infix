@@ -14,6 +14,7 @@
 using namespace std;
 
 void Menu(int choice);
+string Get_Input(string prompt);
 
 int main() {
     int menu_option = User_Inputted_Number(MENU_PROMPT, INVALID_MENU_INPROMPT, INVALID_MENU_INPROMPT, MENU_LOWER_BOUND_OPTION, MENU_UPPER_BOUND_OPTION);
@@ -27,31 +28,45 @@ void Menu(int choice)
     {
         case 1:
         {
-            string expression;
-            cout<< "Enter Infix Expression: ";
-            getline(cin,expression);
+            string expression = Get_Input("Enter Infix Expression: ");
             cout << "Postfix: " <<  infix_To_Postfix(expression) << "\n";
             break;
         }
         
         case 2:
         {
-            string postfix;
-            cout << "Enter Postfix: ";
-            getline(cin, postfix);
+            string postfix = Get_Input("Enter Postfix: ");
             cout << "Evaluated Postfix: "  << Evluate_Postfix(postfix) << "\n";
             break;
         }
             
         case 3:
         {
-            string expression;
-            cout<< "Enter Infix Expression: ";
-            getline(cin,expression);
+            string expression = Get_Input("Enter Infix Expression: ");
             string postfix = infix_To_Postfix(expression);
             cout << "Postfix: " <<  postfix << "\n";
             cout << "Evaluated Postfix: "  << Evluate_Postfix(postfix) << "\n";
             break;
         }
     }
+}
+
+string Get_Input(string prompt)
+{
+    string expression;
+    bool invaild_input;
+    
+    do
+    {
+        cout<< prompt;
+        getline(cin, expression);
+        invaild_input = Validate_Input(expression);
+        
+        if (!invaild_input)
+        {
+            cout << "\nInvalid Input!\n\n";
+        }
+    } while (!invaild_input);
+    
+    return expression;
 }
